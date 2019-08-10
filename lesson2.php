@@ -120,3 +120,16 @@ function power ($val, $pow) {
 echo power (2,3);
 
 echo "<br>";
+
+#Задание 7
+
+function currentTime() {
+
+ $hours = date('H');
+ $minutes = date('i');
+
+ if ($hours)
+
+}
+
+echo currentTime();

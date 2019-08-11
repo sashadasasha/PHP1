@@ -1,10 +1,10 @@
 <?php 
 
-function renderTemplate($page, $content = '')
+function renderTemplate($page, $header = '', $menu = '', $footer = '')
 {
     ob_start();
-    include $page . ".php";
+    include $page. ".tmpl";
     return ob_get_clean();
 }
 
-renderTemplate('main', 123);
+echo renderTemplate('doctype', renderTemplate('header'), renderTemplate('menu'), renderTemplate('footer'));

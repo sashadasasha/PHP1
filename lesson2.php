@@ -81,10 +81,16 @@ function multiply ($arg1, $arg2) {
 echo multiply($a,$b);
 
 function divide ($arg1, $arg2) {
+
+  if ($arg2 == 0) {
+    return "Error! <br>";
+  }
+
   return round($arg1/$arg2, 2)."<br>";
 }
 
 echo divide($a,$b);
+echo divide ($a,0);
 
 #Задание 4
 
@@ -123,13 +129,39 @@ echo "<br>";
 
 #Задание 7
 
-function currentTime() {
-
- $hours = date('H');
- $minutes = date('i');
-
- if ($hours)
-
+function rightDeclention ($number, $word1, $word2, $word3) {
+  $remainder = $number%10;
+  if ($number > 10 && $number < 20) {
+    return $word1;
+  }
+  if ($remainder > 1 && $remainder < 5) {
+    return $word2;
+  }
+  if ($remainder == 1) {
+    return $word3;
+  }
+  return $word1;
 }
 
-echo currentTime();
+$hours = (int)date('H');
+$minutes = (int)date('i');
+
+echo $hours.' '.rightDeclention ($hours, "часов", "часа", "час").' '.$minutes.' '.rightDeclention ($minutes, "минут", "минуты", "минута");
+echo "<br>";
+
+$hours = 2;
+$minutes = 02;
+
+echo $hours.' '.rightDeclention ($hours, "часов", "часа", "час").' '.$minutes.' '.rightDeclention ($minutes, "минут", "минуты", "минута");
+echo "<br>";
+
+$hours = 1;
+$minutes = 01;
+
+echo $hours.' '.rightDeclention ($hours, "часов", "часа", "час").' '.$minutes.' '.rightDeclention ($minutes, "минут", "минуты", "минута");
+echo "<br>";
+
+$hours = 11;
+$minutes = 11;
+
+echo $hours.' '.rightDeclention ($hours, "часов", "часа", "час").' '.$minutes.' '.rightDeclention ($minutes, "минут", "минуты", "минута");

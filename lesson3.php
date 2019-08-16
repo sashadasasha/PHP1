@@ -116,7 +116,32 @@ function withoutSpace (string $str) {
 
 echo withoutSpace($string);
 
+# Задание 6
 
+$menu =[
+  "Марки авто" => ["Отечественные машины" => ["Гранта","X-cross","Веста"],
+                    "Иномарки" => ["Kia" => ["Rio","Ceed", "Sportage"],
+                                "Renault" => ["Logan","Sandero","Kaptur"]
+                      ]
+                  ] 
+];
+
+function menuGenerate (array $list) {
+  foreach ($list as $key => $value){
+    if (gettype($key) == "string"){
+    echo "<ul>{$key}";
+    }
+    if (gettype($value) == "string") {
+    echo "<li>$value</li>";
+    
+    } elseif (gettype($value) == "array") {
+      menuGenerate ($value);
+      echo "</ul>";
+    } 
+  }
+}
+
+echo menuGenerate($menu);
 
  # Задание 7
 
@@ -193,4 +218,5 @@ return $result. "<br>";
 }
 
 echo stringTransform($string);
+
  

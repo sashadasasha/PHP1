@@ -1,4 +1,5 @@
 <?php
+
 //Точка входа в приложение, сюда мы попадаем каждый раз когда загружаем страницу
 
 include_once "../config/config.php";
@@ -16,5 +17,6 @@ if ($url_array[1] == "") {
 $params = prepareVariables($page);
 
 //Вызываем рендер, и передаем в него имя шаблона и массив подстановок
+
 echo render($page, $params);
 

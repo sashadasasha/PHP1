@@ -1,4 +1,5 @@
 <?php
+
 define("TEMPLATES_DIR", "../views/");
 define("LAYOUTS_DIR", 'layout/');
 

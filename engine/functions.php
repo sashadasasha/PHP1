@@ -113,6 +113,7 @@ function viewsUpdate($id) {
     $db = getDb("gallery");
     mysqli_query($db, "UPDATE gallery_root SET views = views + 1 WHERE id = {$id}");
 }
+
 function renderTemplate($page, array $params = [])
 {
     ob_start();

@@ -1,53 +1,22 @@
 <?php
 
+//Точка входа в приложение, сюда мы попадаем каждый раз когда загружаем страницу
+
 include_once "../config/config.php";
 
-if (isset($_GET['page'])) {
-    $page = $_GET['page'];
-} else {
+$url_array = explode("/", $_SERVER['REQUEST_URI']);
+
+//Читаем параметр page из url, чтобы определить, какую страницу-шаблон
+//хочет увидеть пользователь, по умолчанию это будет index
+if ($url_array[1] == "") {
     $page = 'main';
+} else {
+    $page = $url_array[1];
 }
 
-$params = [];
+$params = prepareVariables($page);
 
-switch ($page) {
-
-    case 'main':
-        $params = [];
-        break;
-
-    case 'catalog':
-        $params = [
-            'catalog' => [
-                "Спички",
-                "Метла",
-                "Ведро"
-            ],
-            'name' => "Вася"
-        ];
-        break;
-
-    case 'apicatalog':
-        $params = [
-            'catalog' => [
-                "Спички",
-                "Метла",
-                "Ведро"
-            ]
-        ];
-        echo json_encode($params, JSON_UNESCAPED_UNICODE);
-        die();
-        break;
-    case 'gallery':
-
-        $img = array_slice(scandir("../public/gallery_img/small/"),2);
-        $params = [
-            'images' => $img,
-            'addres' => "../public/gallery_img/small/"
-        ];
-
-        break;
-}
+//Вызываем рендер, и передаем в него имя шаблона и массив подстановок
 
 echo render($page, $params);
 

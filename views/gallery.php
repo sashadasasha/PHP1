@@ -1,9 +1,7 @@
 Галерея<br>
-<div class="gallery">
-<?foreach ($images as $image):?>
 
-<img src ="<?=$addres . $image?>" id="<?=$image?>">
 
-<?endforeach;?> 
-</div>
-<div class="modalWindow"></div>
+<?foreach ($img as $value):?>
+<a href='/image/?id=<?=$value['id']?>'><img src="/gallery_img/small/<?=$value['image']?>"></a>
+
+<?endforeach;?>

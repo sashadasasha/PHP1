@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 AddDefaultCharset UTF-8
 DirectoryIndex index.php index.html
 
+=======
+>>>>>>> 1918310b142db09b6c326d076b154dd0f49094c0
 RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
+<<<<<<< HEAD
 RewriteRule . index.php
+=======
+RewriteRule . index.php
+>>>>>>> 1918310b142db09b6c326d076b154dd0f49094c0

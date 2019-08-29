@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <div class = "catalog">
 <? foreach ($goods as $item): ?>
@@ -11,3 +12,11 @@
 <div class="modalWindow">
 </div>
 
+=======
+Привет <?=$name?><br>
+Каталог
+<?php
+var_dump($catalog);
+
+?>
+>>>>>>> 1918310b142db09b6c326d076b154dd0f49094c0

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Сен 02 2019 г., 10:21
+-- Время создания: Сен 05 2019 г., 15:25
 -- Версия сервера: 10.4.6-MariaDB
 -- Версия PHP: 7.3.8
 
@@ -63,7 +63,32 @@ INSERT INTO `basket` (`id`, `goods_id`, `session_id`) VALUES
 (22, 1, '43b78ef1c5f7a1811bd2562ce8f207ab'),
 (23, 1, 'ba8c3a3603579f1d2c6d99066ca964d4'),
 (24, 2, 'ba8c3a3603579f1d2c6d99066ca964d4'),
-(25, 2, 'ba8c3a3603579f1d2c6d99066ca964d4');
+(25, 2, 'ba8c3a3603579f1d2c6d99066ca964d4'),
+(66, 2, 'c3d4d48d70ee1045a805cd62d70f3e6b'),
+(67, 2, 'c3d4d48d70ee1045a805cd62d70f3e6b'),
+(68, 2, 'c3d4d48d70ee1045a805cd62d70f3e6b'),
+(69, 1, 'c3d4d48d70ee1045a805cd62d70f3e6b'),
+(70, 1, 'c3d4d48d70ee1045a805cd62d70f3e6b'),
+(71, 3, 'c3d4d48d70ee1045a805cd62d70f3e6b'),
+(72, 3, 'c3d4d48d70ee1045a805cd62d70f3e6b'),
+(90, 1, 'e7e42de87c7e25cea44e9f15e8645c9e'),
+(91, 1, 'e7e42de87c7e25cea44e9f15e8645c9e'),
+(92, 1, '19e854b394f48b6ddf57000364b5efbe'),
+(93, 1, '19e854b394f48b6ddf57000364b5efbe'),
+(94, 2, '19e854b394f48b6ddf57000364b5efbe'),
+(95, 2, '19e854b394f48b6ddf57000364b5efbe'),
+(96, 3, '19e854b394f48b6ddf57000364b5efbe'),
+(97, 3, '19e854b394f48b6ddf57000364b5efbe'),
+(98, 1, '2f318cb5c5edcdf209b2396cea5e8954'),
+(99, 2, '2f318cb5c5edcdf209b2396cea5e8954'),
+(100, 3, '2f318cb5c5edcdf209b2396cea5e8954'),
+(101, 1, 'd905c738607bb456fbd3659acb3d0667'),
+(102, 2, 'd905c738607bb456fbd3659acb3d0667'),
+(103, 2, 'd905c738607bb456fbd3659acb3d0667'),
+(104, 2, '77b31ab365c1880109dd777bc380c1ca'),
+(105, 3, '77b31ab365c1880109dd777bc380c1ca'),
+(106, 1, '77b31ab365c1880109dd777bc380c1ca'),
+(107, 1, '77b31ab365c1880109dd777bc380c1ca');
 
 -- --------------------------------------------------------
 
@@ -102,10 +127,10 @@ CREATE TABLE `feedback` (
 
 INSERT INTO `feedback` (`id`, `name`, `feedback`) VALUES
 (15, 'Посетитель', 'Еще отзыв'),
-(25, 'Вася', 'Еще один отзыв 222'),
 (28, 'Aleksandra', '23567'),
 (29, 'Aleksandra', 'е555'),
-(30, 'Resume', '23424');
+(30, 'Resume', '234248999'),
+(31, '24234', '2342342342424');
 
 -- --------------------------------------------------------
 
@@ -154,6 +179,28 @@ INSERT INTO `news` (`id`, `category`, `prev`, `text`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `session_id` text NOT NULL,
+  `login` varchar(64) NOT NULL,
+  `tel` varchar(64) NOT NULL,
+  `address` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`id`, `session_id`, `login`, `tel`, `address`) VALUES
+(1, 'c3d4d48d70ee1045a805cd62d70f3e6b', '24234', 'werwerwer', 'werwrwerwr'),
+(2, '77b31ab365c1880109dd777bc380c1ca', 'sas', '+79096870832', 'qweqwe');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `users`
 --
 
@@ -161,15 +208,19 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `login` text NOT NULL,
   `pass` text NOT NULL,
-  `hash` text NOT NULL
+  `hash` text NOT NULL,
+  `tel` varchar(63) NOT NULL,
+  `email` varchar(63) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `pass`, `hash`) VALUES
-(1, 'admin', '$2y$10$GAh95KWqFf1Fw4YyH/BCnuODYbJ1Mln78vDuOIwj7WQvChhR8QcX.', '6783721935d6cc670b6bb68.51256905');
+INSERT INTO `users` (`id`, `login`, `pass`, `hash`, `tel`, `email`) VALUES
+(1, 'admin', '$2y$10$GAh95KWqFf1Fw4YyH/BCnuODYbJ1Mln78vDuOIwj7WQvChhR8QcX.', '6783721935d6cc670b6bb68.51256905', '', ''),
+(3, 'sas', '$2y$10$ZbnZQFwYeRvGAMQYQOVRvuJgNAtxL9Q3NcSEwMFnbue2veuIcSJfi', '7212751445d70fdbd835ba5.09533111', '+79096870832', 'sas@gmail.com'),
+(7, 'test', '$2y$10$KKCgMY82S1NWPgV9DLdh1.TvmNPhSV8UPVO76BA/1SlUEn.nSUDRy', '687176625d70fa3b667ae9.50687446', '123@345.ru', '+1234567895');
 
 --
 -- Индексы сохранённых таблиц
@@ -200,6 +251,12 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
@@ -213,7 +270,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -225,7 +282,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
@@ -234,10 +291,16 @@ ALTER TABLE `news`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT для таблицы `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

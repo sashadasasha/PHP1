@@ -15,6 +15,7 @@ function prepareVariables($page, $action, $id)
     if (is_auth()) {
         $params['allow'] = true;
         $params['user'] = get_user();
+        $params['tel'] = get_info($_SESSION['id']);
     }
 
     $params['count'] = getBasketCount();
@@ -73,10 +74,6 @@ function prepareVariables($page, $action, $id)
             $params['goods'] = getAllGoods();
             break;
 
-        //case 'item':
-          //  $params['good'] = getOneGood($id);
-           // break;
-
         case 'api':
             if ($action == "buy") {
                 $data = json_decode(file_get_contents('php://input'), true);
@@ -103,8 +100,6 @@ function prepareVariables($page, $action, $id)
                 echo json_encode($params);
                 die();
             }
-            
-
             if($action == "catalogItem") {
                 $data = json_decode(file_get_contents('php://input'), true);
                 $id = $data['idImg'];
@@ -115,6 +110,74 @@ function prepareVariables($page, $action, $id)
                 echo json_encode($response, JSON_UNESCAPED_UNICODE);
                 die();
             }
+
+            if($action == "add_user") {
+                $data = json_decode(file_get_contents('php://input'), true);
+                
+                $login = $data['login'];
+                $pass = $data['password'];
+                if ($login == '') { unset($login);}
+                if ($pass == '') { unset($pass);}
+
+                if (empty($login) || empty($pass)) 
+                    {
+                        exit ("Вы должны обязательно указать имя и пароль!");
+                    }
+
+                $email = $data['email'];
+                $tel = $data['tel'];    
+                
+                $login = trim(htmlspecialchars(strip_tags(stripslashes($login))));
+                $pass = trim(htmlspecialchars(strip_tags(stripslashes($pass))));
+                $email =trim(htmlspecialchars(strip_tags(stripslashes($email))));
+                $tel =trim(htmlspecialchars(strip_tags(stripslashes($tel))));
+
+                $pass = password_hash($pass, PASSWORD_DEFAULT);
+
+                $response = addUser($login, $pass, $email, $tel);
+
+                echo json_encode($response, JSON_UNESCAPED_UNICODE);
+                die();
+            }
+
+            if ($action == "order") {
+                $data = json_decode(file_get_contents('php://input'), true);
+                
+                $login = $data['login'];
+                $tel = $data['tel'];
+                $addr = $data['addres'];
+
+                if ($login == '') { unset($login);}
+                if ($tel == '') { unset($tel);}
+                if ($addr == '') { unset($addr);}
+
+                if (empty($login) || empty($tel) || empty($addr)) 
+                    {
+                        exit ("Заполните все поля формы");
+                    }
+
+                $login = trim(htmlspecialchars(strip_tags(stripslashes($login))));
+                $tel =trim(htmlspecialchars(strip_tags(stripslashes($tel)))); 
+                $addr=trim(htmlspecialchars(strip_tags(stripslashes($addr))));  
+                
+                $response = addOrder($login, $tel, $addr);
+
+                echo json_encode($response, JSON_UNESCAPED_UNICODE);
+                die();
+            }
+
+            if($action == "orderItem") {
+                $data = json_decode(file_get_contents('php://input'), true);
+                $id = $data['id'];
+                $oneOrder = getOrder($id);
+                var_dump($oneOrder);
+                $response['desc'] = $oneOrder['description'];
+                $response['imgAddr'] = $oneOrder['image'];
+                $response['price'] = $oneOrder['price'];
+                echo json_encode($response, JSON_UNESCAPED_UNICODE);
+                die();
+            }
+
             break;
         case "basket":
 
@@ -122,6 +185,10 @@ function prepareVariables($page, $action, $id)
             $params['summ'] = summFromBasket();
 
             break;
+
+        case "orders":
+            $params['orders'] = getAllOrders();
+           
     }
 
 

@@ -4,6 +4,12 @@
  *
  */
 
+
+/*
+ * Функция, осуществляющая соединение с базой данных и возвращающее его
+ * static позволяет сохранить состояние и вернуть уже текущее соединение
+ * чтобы не делать нового
+ */
 function getDb() {
 
     static $db = null;
@@ -20,7 +26,6 @@ function closeDb() {
     mysqli_close(getDb());
 }
 
-
 /*
  * Обертка для выполнения любого запроса
  * Передаем в параметре текст sql-запроса
@@ -30,10 +35,16 @@ function closeDb() {
 function executeQuery($sql)
 {
     $db = getDb();
+
     $result = @mysqli_query($db, $sql) or die(mysqli_error($db));
     return $result;
 }
 
+/*
+ * Обертка для выполнения запроса на получение данных
+ * Данные возвращаются в виде ассоциативного массива
+ * Цикл по получению данных уже реализован в этой функции
+ */
 function getAssocResult($sql)
 {
     $db = getDb();
@@ -42,10 +53,4 @@ function getAssocResult($sql)
     while ($row = mysqli_fetch_assoc($result))
         $array_result[] = $row;
     return $array_result;
-}
-
-function getResult ($sql, $name_base) {
-    $db = getDb($name_base);
-    return @mysqli_query($db, $sql) or die(mysqli_error($db));
-
 }

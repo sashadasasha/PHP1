@@ -14,9 +14,22 @@
 
 Общая стоимость: <span id="summ"><?=$summ?></span><br>
 <h2>Оформите заказ</h2>
-<form action="/order/" method="post">
-    <input placeholder="Ваше имя" type="text" name="name">
-    <input placeholder="Телефон" type="text" name="phone">
-    <input placeholder="Адрес доставки" type="text" name="adres">
-    <input type="submit">
+<? if ($allow):?>
+<form action="/order/" method="post" class="formOrder">
+    <input placeholder="<?=$user?>" type="text" name="name" id="orderLogin">
+    <input placeholder="<?=$tel?>" type="text" name="phone" id="orderTel">
+    <input placeholder="Адрес доставки" type="text" name="adres" id="orderAdr">
+    <input type="button" value="Оформить">
 </form>
+
+<? else: ?>
+<form action="/order/" method="post" class="formOrder">
+    <input placeholder="Ваше имя" type="text" name="name" id="orderLogin">
+    <input placeholder="Телефон" type="text" name="phone" id="orderTel">
+    <input placeholder="Адрес доставки" type="text" name="adress" id="orderAdr">
+    <input type="button" value="Оформить">
+</form>
+
+<?endif;?>
+
+<div class = "infoMes"></div>

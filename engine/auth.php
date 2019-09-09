@@ -25,6 +25,8 @@ function auth($login, $pass)
 }
 
 function is_admin() {
+
+    return (get_user() === "admin") ? true : false; 
 }
 
 function is_auth()
@@ -43,7 +45,18 @@ function is_auth()
     return isset($_SESSION['login']) ? true : false;
 }
 
-function get_user()
-{
+function get_user() {
     return is_auth() ? $_SESSION['login'] : false;
+}
+
+function get_info($id) {
+    if (is_auth()) {
+        $db = getDb();
+        $sql = "SELECT * FROM `users` WHERE `id` ='{$id}'";
+        $result = mysqli_query($db, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $tel = $row['tel'];
+
+        return $tel;
+    }
 }
